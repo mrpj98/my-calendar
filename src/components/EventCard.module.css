@@ -1,0 +1,36 @@
+
+.modal {
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    background-color: white;
+    padding: 1rem;
+    text-align: center;
+    width: 30rem;
+    z-index: 10;
+    position: fixed;
+    top: 20vh;
+    left: calc(50% - 15rem);
+  }
+
+  .closebtn{
+      text-align: right;
+      background-color: #3288E6;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      border-radius: 4px;
+      border: 1px solid #17293b
+  }
+  .addbtn{
+      text-align: left;
+      background-color: #3288E6;
+      margin-right: 1rem;
+      margin-left: 1rem;
+      border-radius: 4px;
+      border: 1px solid #17293b
+  }
+  .addbtn:hover{
+    background-color: #83bcfa;
+  }
+  .closebtn:hover{
+    background-color: #83bcfa;
+  }
