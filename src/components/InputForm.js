@@ -5,6 +5,24 @@ export default function InputForm(props) {
     const timeRef = useRef();
     const titleRef = useRef();
     const descRef = useRef();
+    
+
+    function submit(event){
+        event.preventDefault();
+        const enteredTime = timeRef.current.value;
+        const enteredTitle = titleRef.current.value;
+        const enteredDesc = descRef.current.value;
+        const enteredDate = props.eventDate;
+
+        const eventData ={
+            date: enteredDate,
+            time: enteredTime,
+            title: enteredTitle,
+            description: enteredDesc,
+        };
+        console.log(typeof(enteredDate));
+        props.onEventAdd(eventData);
+    }
 function close() {
     props.onCancel();
 }
@@ -12,7 +30,7 @@ function close() {
     return(
         <div className={classes.modal}>
             <p>Add Event</p>
-                <form>
+                <form onSubmit={submit}>
                     <div>
                         <label htmlFor='time'>Time</label>
                         <input type="time" required id='time' ref={timeRef}/>
