@@ -6,9 +6,11 @@ import Background from './components/Background';
 import EventCard from './components/EventCard';
 import InputForm from './components/InputForm';
 
-const datesToAddClassTo = [];  
 
- 
+
+
+ const datesToAddClassTo = [];  
+
 function isSameDay(a, b) { 
  // console.log(a, b);
   if(a === b){
@@ -20,6 +22,9 @@ function isSameDay(a, b) {
 
 
 function App() {
+  
+  
+
 function addEvent(eventData){
   console.log(JSON.stringify(eventData))
   fetch('http://localhost:7058/api/calendar', {
@@ -45,25 +50,7 @@ function tileClassName({ date, view }) {
     }
   }   
 } 
-function getData()
-{
-  
-    fetch('http://localhost:7058/api/calendar')
-    .then(response => response.json())
-    .then(data => {
-      const events =[];
-      for (const key in data) {
-        const event ={
-          id: key,
-          ...data[key]
-        };
-        events.push(event);
-        console.log(events);
-       setNewData(events)
-      }
-    });
-    
-}
+
 /*function compareDates(dateList){
   dateList.forEach(element => {
     console.log(element.date, value.toISOString().slice(0,10));
@@ -86,17 +73,48 @@ console.log(value);
 setValue(data);
 console.log(value);
 setModalIsOpen(true);
-getData();
 //console.log(newData);
 
 console.log(todayEvent);
 }
 
+useEffect(() =>
+{
+  
+    fetch('http://localhost:7058/api/calendar')
+    .then(response => response.json())
+    .then(data => {
+      const events =[];
+      for (const key in data) {
+        const event ={
+          id: key,
+          ...data[key]
+        };
+        events.push(event);
+        console.log(events);
+       setNewData(events)
+      }
+    });
+    
+},[value])
 useEffect(()=> {
   //datesToAddClassTo.
+  console.log(newData);
   newData.forEach(element => {
-
-    datesToAddClassTo.push(element.date);
+    let newDate = true;
+    for(let i = 0; i<datesToAddClassTo.length; i++)
+    {
+      if(datesToAddClassTo[i] === element.date)
+      {
+        newDate = false;
+      }
+    }
+    if(newDate === true)
+    {
+      datesToAddClassTo.push(element.date);
+    }
+    
+    
     console.log(datesToAddClassTo);
     console.log(element.date, value.toISOString().slice(0,10));
     if(element.date === value.toISOString().slice(0,10))
@@ -104,7 +122,7 @@ useEffect(()=> {
      // eventBool = true;
       setTodayEvent(element);
       //console.log(todayEvent)
-      return;
+      //return;
     }
 
   });
